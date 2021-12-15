@@ -5,12 +5,9 @@ const { MongoClient } = require("mongodb");
 const ObjectId = require("mongodb").ObjectId;
 var cors = require("cors");
 require("dotenv").config(); //env setup
-//
-//
 //middleware setup
 app.use(cors());
 app.use(express.json());
-
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.v0ciw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
@@ -53,7 +50,7 @@ async function run() {
       //console.log(services);
       res.send(services);
     });
-    //post api to set order data oin mongodb database
+    //post api to set order data oin mongodb data
     app.post("/orders", async (req, res) => {
       const newService = req.body;
       const result = await orders.insertOne(newService);
@@ -80,7 +77,6 @@ run().catch(console.dir);
 app.get("/", (req, res) => {
   res.send("courier server runnig");
 });
-
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
